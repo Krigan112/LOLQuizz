@@ -8,12 +8,18 @@ const IndexScreen = () => {
         <IndexContainer>
             <Sh1>Welcome to the LOLQuizz!</Sh1>
             <Sh2>Test your memory, and try to guess the name of each League of legends Champion!</Sh2>
+            <Sspan>You have 25 minutes to guess all the champions. Good luck!</Sspan>
             <LinkContainer>
                 <SLink to={"/quizz"}>BEGIN</SLink>
             </LinkContainer>
         </IndexContainer>
     );
 };
+
+const Sspan = styled.span`
+  text-align: center;
+  display: block;
+`;
 
 const IndexContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
