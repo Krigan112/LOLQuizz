@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import GameInput from "../components/GameInput";
 import Champion from "../components/Champion";
 import { configureAnchors, goToAnchor } from 'react-scrollable-anchor'
+import firstBloodSound from '../assets/sounds/firstblood.mp3'
 
 const QuizzScreen = () => {
     configureAnchors({offset: -85, scrollDuration: 1000});
+    const [isFirstBlood, setFirstBlood] = useState(true);
     const [champList, setChampList] = useState([]);
     useEffect(() => {
-        console.log('useEffect champList');
         if (champList.length === 0) {
             if (localStorage.getItem('champList')) {
                 setChampList(JSON.parse(localStorage.getItem('champList')));
@@ -22,19 +23,20 @@ const QuizzScreen = () => {
     }, [champList.length]);
 
     function setVisible(championListKey) {
-        let newChampList = champList;
-        newChampList[championListKey].isVisible = true;
-        setChampList(newChampList);
-        console.log('setVisible : ', champList[championListKey].name, '; isVisible : ', champList[championListKey].isVisible);
-        console.log('setChampList');
+        if(isFirstBlood) {
+            setFirstBlood(false);
+            const audio = new Audio(firstBloodSound);
+            audio.play().finally();
+        }
+        champList[championListKey].isVisible = true;
+        setChampList(champList);
         goToAnchor(champList[championListKey].id);
+        setGuess('');
     }
 
     const [guess, setGuess] = useState('');
 
     useEffect(() => {
-        console.log('useEffect guess');
-        console.log(guess);
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '')) {
                 setVisible(key);
@@ -50,7 +52,7 @@ const QuizzScreen = () => {
     }
     return (
         <div>
-            <GameInput setGuess={setGuess}/>
+            <GameInput guess={guess} setGuess={setGuess}/>
             <ChampListContainer>
                 {champList.map(champion => (
                     <Champion key={champion.id} champion={champion}/>

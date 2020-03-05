@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const GameInput = ({setGuess}) => {
+const GameInput = ({guess, setGuess}) => {
 
     return (
         <InputContainer>
             <StyledLabel>
                 <span>Champion name</span>
                 <input
+                    value={guess}
                     type='text'
                     onChange={event => setGuess(event.target.value)}
                 />
