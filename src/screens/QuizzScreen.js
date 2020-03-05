@@ -33,6 +33,7 @@ const QuizzScreen = () => {
     const [guess, setGuess] = useState('');
 
     useEffect(() => {
+        console.log('useEffect guess');
         console.log(guess);
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '')) {

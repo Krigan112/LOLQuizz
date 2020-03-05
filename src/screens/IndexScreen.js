@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import styled from 'styled-components';
+import welcome from '../assets/sounds/welcome.mp3';
 
 const IndexScreen = () => {
-
+    const audio = new Audio(welcome);
+    useEffect(() => {
+        audio.play();
+    });
     return (
         <IndexContainer>
             <Sh1>Welcome to the LOLQuizz!</Sh1>
