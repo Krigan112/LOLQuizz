@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import GameTimer from './Timer';
 
 const GameInput = ({guess, setGuess}) => {
 
@@ -12,6 +13,7 @@ const GameInput = ({guess, setGuess}) => {
                     type='text'
                     onChange={event => setGuess(event.target.value)}
                 />
+                <GameTimer/>
             </StyledLabel>
         </InputContainer>
     );
