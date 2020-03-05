@@ -1,17 +1,22 @@
 import React, {useEffect, useState} from 'react';
 
-const GameTimer = () => {
-    const [seconds, setSeconds] = useState(120);
+const GameTimer = ({setLost}) => {
+    const [seconds, setSeconds] = useState(1500);
 
     useEffect(() => {
-        setInterval(() => {
+        const timer = setTimeout(() => {
             if (seconds > 0) {
                 setSeconds(seconds-1);
                 console.log('seconds - 1');
             } else {
-                clearInterval();
+                timer.toFixed(0);
+                clearTimeout(timer);
+                setLost(true);
             }
         }, 1000);
+        return () => {
+            clearTimeout(timer);
+        }
     }, [seconds]);
 
     return (
