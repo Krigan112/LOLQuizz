@@ -1,4 +1,4 @@
-import React, {} from 'react';
+import React, {useEffect} from 'react';
 import winImage from '../assets/images/victory.png';
 import lostImage from '../assets/images/defeat.png';
 import styled from 'styled-components';
@@ -22,18 +22,22 @@ const IsLost = () => {
 };
 
 const IsEnd = ({isWin, isLost}) => {
+    useEffect(() => {
+        if (isWin) {
+            const victoryAudio = new Audio(victory);
+            victoryAudio.play().finally();
+        } else if (isLost) {
+            const defeatAudio = new Audio(defeat);
+            defeatAudio.play().finally();
+        }
+    });
     if (isWin) {
-        console.log('isWin', isWin);
-        const victoryAudio = new Audio(victory);
-        victoryAudio.play().finally();
         return (
             <SDiv>
                 <IsWin/>
             </SDiv>
         );
     } else if (isLost) {
-        const defeatAudio = new Audio(defeat);
-        defeatAudio.play().finally();
         return (
             <SDiv>
                 <IsLost/>

@@ -20,9 +20,10 @@ const QuizzScreen = () => {
     const [isLost, setLost] = useState(false);
     const [comboTime, setComboTime] = useState(0);
     useEffect(() => {
+        console.log('useEffect comboTime');
         const comboTimer = setTimeout(() => {
             if (comboTime > 0) {
-                setComboTime(comboTime-1);
+                setComboTime(comboTime - 1);
             } else if (comboTime <= 0) {
                 setCombo(0);
                 clearTimeout(comboTimer);
@@ -31,9 +32,10 @@ const QuizzScreen = () => {
         return () => {
             clearTimeout(comboTimer);
         }
-    });
+    }, [comboTime]);
     const [combo, setCombo] = useState(0);
     useEffect(() => {
+        console.log('useEffect combo');
         switch(combo){
             case 2:
                 const dka = new Audio(dk);
@@ -61,13 +63,15 @@ const QuizzScreen = () => {
     }, [combo]);
     const [championCount, setChampionCount] = useState(0);
     useEffect(() => {
-        if (champList.length > 0 && championCount >= champList.length) {
+        console.log('useEffect championCount');
+        if (champList.length > 0 && championCount >= 3) {
             setEnd(true);
             setWin(true);
         }
     }, [championCount]);
     const [champList, setChampList] = useState([]);
     useEffect(() => {
+        console.log('useEffect champList');
         if (champList.length === 0) {
             if (localStorage.getItem('champList')) {
                 setChampList(JSON.parse(localStorage.getItem('champList')));
@@ -94,6 +98,7 @@ const QuizzScreen = () => {
 
     const [guess, setGuess] = useState('');
     useEffect(() => {
+        console.log('useEffect guess');
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '') && !champList[key].isVisible) {
                 goToAnchor(champList[key].id);
