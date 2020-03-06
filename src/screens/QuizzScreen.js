@@ -54,7 +54,7 @@ const QuizzScreen = () => {
                 setChampionCount(championCount+1);
             }
         }
-    });
+    }, [guess]);
     async function fetchChamps() {
         const result = await axios({
             method: 'get',

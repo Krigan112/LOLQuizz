@@ -2,6 +2,8 @@ import React, {} from 'react';
 import winImage from '../assets/images/victory.png';
 import lostImage from '../assets/images/defeat.png';
 import styled from 'styled-components';
+import victory from '../assets/sounds/victory.mp3';
+import defeat from '../assets/sounds/defeat.mp3';
 
 const IsWin = () => {
     return (
@@ -21,12 +23,17 @@ const IsLost = () => {
 
 const IsEnd = ({isWin, isLost}) => {
     if (isWin) {
+        console.log('isWin', isWin);
+        const victoryAudio = new Audio(victory);
+        victoryAudio.play().finally();
         return (
             <SDiv>
                 <IsWin/>
             </SDiv>
         );
     } else if (isLost) {
+        const defeatAudio = new Audio(defeat);
+        defeatAudio.play().finally();
         return (
             <SDiv>
                 <IsLost/>
