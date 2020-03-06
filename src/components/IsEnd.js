@@ -1,6 +1,7 @@
 import React, {} from 'react';
 import winImage from '../assets/images/victory.png';
 import lostImage from '../assets/images/defeat.png';
+import styled from 'styled-components';
 
 const IsWin = () => {
     return (
@@ -18,23 +19,39 @@ const IsLost = () => {
     );
 };
 
-const IsEnd = (isWin, isLost) => {
-
+const IsEnd = ({isWin, isLost}) => {
     if (isWin) {
         return (
-            <div>
+            <SDiv>
                 <IsWin/>
-            </div>
+            </SDiv>
         );
     } else if (isLost) {
         return (
-            <div>
+            <SDiv>
                 <IsLost/>
-            </div>
+            </SDiv>
         );
     } else {
         return null;
     }
 };
+
+const SDiv = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    & img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+`;
 
 export default IsEnd;
