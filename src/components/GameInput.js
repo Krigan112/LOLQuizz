@@ -14,7 +14,7 @@ const GameInput = ({isEnd, setEnd, guess, setGuess, champList, championCount}) =
                     type='text'
                     onChange={event => setGuess(event.target.value)}
                 />
-                <GameTimer setEnd={setEnd}/>
+                <GameTimer isEnd={isEnd} setEnd={setEnd}/>
                 <Counter championCount={championCount} maxChamp={champList.length}/>
             </StyledLabel>
         </InputContainer>
