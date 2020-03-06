@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GameTimer from './Timer';
 import Counter from "./Counter";
 
-const GameInput = ({isEnd, setEnd, guess, setGuess, champList, championCount}) => {
+const GameInput = ({isEnd, setEnd, setLost, guess, setGuess, champList, championCount}) => {
     return (
         <InputContainer>
             <StyledLabel>
@@ -14,7 +14,7 @@ const GameInput = ({isEnd, setEnd, guess, setGuess, champList, championCount}) =
                     type='text'
                     onChange={event => setGuess(event.target.value)}
                 />
-                <GameTimer isEnd={isEnd} setEnd={setEnd}/>
+                <GameTimer isEnd={isEnd} setEnd={setEnd} setLost={setLost}/>
                 <Counter championCount={championCount} maxChamp={champList.length}/>
             </StyledLabel>
         </InputContainer>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-const GameTimer = ({isEnd, setEnd}) => {
+const GameTimer = ({isEnd, setEnd, setLost}) => {
     const [seconds, setSeconds] = useState(1500);
 
     useEffect(() => {
@@ -12,6 +12,7 @@ const GameTimer = ({isEnd, setEnd}) => {
                 timer.toFixed(0);
                 clearTimeout(timer);
                 setEnd(true);
+                setLost(true);
             }
         }, 1000);
         return () => {
