@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import GameTimer from './Timer';
 import Counter from "./Counter";
 
-const GameInput = ({guess, setGuess, champList, championCount}) => {
-    const [isEnd, setEnd] = useState(false);
+const GameInput = ({isEnd, setEnd, guess, setGuess, champList, championCount}) => {
     return (
         <InputContainer>
             <StyledLabel>
