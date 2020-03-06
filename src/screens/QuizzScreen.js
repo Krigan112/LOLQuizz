@@ -9,6 +9,7 @@ import firstBloodSound from '../assets/sounds/firstblood.mp3'
 const QuizzScreen = () => {
     configureAnchors({offset: -85, scrollDuration: 1000});
     const [isFirstBlood, setFirstBlood] = useState(true);
+    const [championCount, setChampionCount] = useState(0);
     const [champList, setChampList] = useState([]);
     useEffect(() => {
         if (champList.length === 0) {
@@ -40,6 +41,7 @@ const QuizzScreen = () => {
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '')) {
                 setVisible(key);
+                setChampionCount(championCount+1);
             }
         }
     });
@@ -52,7 +54,7 @@ const QuizzScreen = () => {
     }
     return (
         <div>
-            <GameInput guess={guess} setGuess={setGuess}/>
+            <GameInput champList={champList} guess={guess} setGuess={setGuess} championCount={championCount}/>
             <ChampListContainer>
                 {champList.map(champion => (
                     <Champion key={champion.id} champion={champion}/>

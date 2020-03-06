@@ -1,20 +1,22 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import GameTimer from './Timer';
+import Counter from "./Counter";
 
-const GameInput = ({guess, setGuess}) => {
-    const [isLost, setLost] = useState(false);
+const GameInput = ({guess, setGuess, champList, championCount}) => {
+    const [isEnd, setEnd] = useState(false);
     return (
         <InputContainer>
             <StyledLabel>
                 <span>Champion name</span>
                 <input
-                    disabled={isLost ? 'disabled' : ''}
+                    disabled={isEnd ? 'disabled' : ''}
                     value={guess}
                     type='text'
                     onChange={event => setGuess(event.target.value)}
                 />
-                <GameTimer setLost={setLost}/>
+                <GameTimer setEnd={setEnd}/>
+                <Counter championCount={championCount} maxChamp={champList.length}/>
             </StyledLabel>
         </InputContainer>
     );
