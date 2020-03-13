@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components';
+import DefaultRouter from './config/Router';
+import { ThemeProvider } from 'styled-components';
+
+import theme from './config/theme';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ThemeProvider theme={theme}>
+        <DefaultTheme>
+          <DefaultRouter />
+        </DefaultTheme>
+      </ThemeProvider>
   );
 }
+
+const DefaultTheme = styled.div`
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  &::after {
+    content: '';
+    opacity: 0.7;
+    background: url(${props => props.theme.bg}) fixed center;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+  }
+`;
 
 export default App;
