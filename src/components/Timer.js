@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 
-const GameTimer = ({setLost}) => {
+const GameTimer = ({isEnd, setEnd, setLost}) => {
     const [seconds, setSeconds] = useState(1500);
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (seconds > 0) {
+            if (seconds > 0 && !isEnd) {
                 setSeconds(seconds-1);
                 console.log('seconds - 1');
-            } else {
+            } else if (seconds <= 0) {
                 timer.toFixed(0);
                 clearTimeout(timer);
+                setEnd(true);
                 setLost(true);
             }
         }, 1000);
