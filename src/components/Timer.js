@@ -7,7 +7,6 @@ const GameTimer = ({isEnd, setEnd, setLost}) => {
         const timer = setTimeout(() => {
             if (seconds > 0 && !isEnd) {
                 setSeconds(seconds-1);
-                console.log('seconds - 1');
             } else if (seconds <= 0) {
                 timer.toFixed(0);
                 clearTimeout(timer);

@@ -20,7 +20,6 @@ const QuizzScreen = () => {
     const [isLost, setLost] = useState(false);
     const [comboTime, setComboTime] = useState(0);
     useEffect(() => {
-        console.log('useEffect comboTime');
         const comboTimer = setTimeout(() => {
             if (comboTime > 0) {
                 setComboTime(comboTime - 1);
@@ -35,43 +34,42 @@ const QuizzScreen = () => {
     }, [comboTime]);
     const [combo, setCombo] = useState(0);
     useEffect(() => {
-        console.log('useEffect combo');
-        switch(combo){
-            case 2:
-                const dka = new Audio(dk);
-                dka.play().finally();
-                break;
-            case 3:
-                const tka = new Audio(tk);
-                tka.play().finally();
-                break;
-            case 4:
-                const qka = new Audio(qk);
-                qka.play().finally();
-                break;
-            case 5:
-                const pka = new Audio(pk);
-                pka.play().finally();
-                break;
-            case 6:
-                const hka = new Audio(hk);
-                hka.play().finally();
-                break;
-            default:
-                return;
+        if(!isEnd) {
+            switch(combo){
+                case 2:
+                    const dka = new Audio(dk);
+                    dka.play().finally();
+                    break;
+                case 3:
+                    const tka = new Audio(tk);
+                    tka.play().finally();
+                    break;
+                case 4:
+                    const qka = new Audio(qk);
+                    qka.play().finally();
+                    break;
+                case 5:
+                    const pka = new Audio(pk);
+                    pka.play().finally();
+                    break;
+                case 6:
+                    const hka = new Audio(hk);
+                    hka.play().finally();
+                    break;
+                default:
+                    return;
+            }
         }
-    }, [combo]);
+    }, [isEnd, combo]);
     const [championCount, setChampionCount] = useState(0);
     useEffect(() => {
-        console.log('useEffect championCount');
-        if (champList.length > 0 && championCount >= 3) {
+        if (champList.length > 0 && championCount >= champList.length) {
             setEnd(true);
             setWin(true);
         }
     }, [championCount]);
     const [champList, setChampList] = useState([]);
     useEffect(() => {
-        console.log('useEffect champList');
         if (champList.length === 0) {
             if (localStorage.getItem('champList')) {
                 setChampList(JSON.parse(localStorage.getItem('champList')));
@@ -98,7 +96,6 @@ const QuizzScreen = () => {
 
     const [guess, setGuess] = useState('');
     useEffect(() => {
-        console.log('useEffect guess');
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '') && !champList[key].isVisible) {
                 goToAnchor(champList[key].id);

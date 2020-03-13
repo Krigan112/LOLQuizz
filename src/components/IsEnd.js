@@ -30,7 +30,7 @@ const IsEnd = ({isWin, isLost}) => {
             const defeatAudio = new Audio(defeat);
             defeatAudio.play().finally();
         }
-    });
+    }, [isWin, isLost]);
     if (isWin) {
         return (
             <SDiv>
