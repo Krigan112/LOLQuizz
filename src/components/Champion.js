@@ -4,7 +4,7 @@ import ScrollableAnchor from "react-scrollable-anchor";
 
 const Champion = ({ champion }) => {
     return (
-        <ScrollableAnchor id={champion.id}>
+        <ScrollableAnchor id={champion.key}>
             <ChampionContainer className={champion.isVisible ? 'visible' : ''}>
                 <div className='champion-image-container'>
                     <img

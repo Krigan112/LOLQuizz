@@ -13,7 +13,7 @@ import pk from '../assets/sounds/pentakill.mp3';
 import hk from '../assets/sounds/hexakill.mp3';
 
 const QuizzScreen = () => {
-    configureAnchors({offset: -85, scrollDuration: 1000});
+    configureAnchors({offset: -110, scrollDuration: 1000});
     const [isFirstBlood, setFirstBlood] = useState(true);
     const [isEnd, setEnd] = useState(false);
     const [isWin, setWin] = useState(false);
@@ -98,7 +98,7 @@ const QuizzScreen = () => {
     useEffect(() => {
         for (let key in champList) {
             if (champList[key].name.toLowerCase().replace(/\s/g, '') === guess.toLowerCase().replace(/\s/g, '') && !champList[key].isVisible) {
-                goToAnchor(champList[key].id);
+                goToAnchor(champList[key].key, false);
                 setVisible(key);
                 setChampionCount(championCount+1);
             }
@@ -117,7 +117,7 @@ const QuizzScreen = () => {
             <GameInput isEnd={isEnd} setEnd={setEnd} setLost={setLost} champList={champList} guess={guess} setGuess={setGuess} championCount={championCount}/>
             <ChampListContainer>
                 {champList.map(champion => (
-                    <Champion key={champion.id} champion={champion}/>
+                    <Champion key={champion.key} champion={champion}/>
                 ))}
             </ChampListContainer>
             <IsEnd isWin={isWin} isLost={isLost}/>
